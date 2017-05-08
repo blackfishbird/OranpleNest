@@ -8,9 +8,23 @@
 	<title>橘蘋巢 OranpleNest</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel='stylesheet' href='plugins/fullcalendar/fullcalendar.css' />
 	<link rel="stylesheet" href="plugins/slick/slick.css"/>
 	<link rel="stylesheet" href="css/style.css">
+	<style>
+		#calendar-container {
+			position: relative;
+			width: 100%;
+			height: 0;
+			padding-bottom: 66.6%;
+		}
+		#calendar-container>iframe {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+		}
+	</style>
 </head>
 <body>
 	<header id="header" data-id="top">
@@ -56,7 +70,9 @@
 						<p>詳情請見 <a title="前往橘蘋巢 FB 粉絲專頁！" href="https://www.facebook.com/oranple.nest/" target="_blank" style="text-decoration: underline;">橘蘋巢 FACEBOOK 粉絲專頁</a>！</p>
 					</article>
 					<article class="col-md-7">
-						<div id="calendar"></div>
+						<div id="calendar-container">
+							<iframe id="calendar" src="https://calendar.google.com/calendar/embed?src=ccsakura-net.com_8a98d1hbmutgrqgkmeee1ab7r0%40group.calendar.google.com&ctz=Asia/Taipei" style="border: 0" frameborder="0" scrolling="no" style="width: 100%; display: block; position: relative;"></iframe>
+						</div>
 					</article>
 				</div>
 			</div>
@@ -212,9 +228,6 @@
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/moment-with-locales.min.js"></script>
-	<script src='plugins/fullcalendar/fullcalendar.js'></script>
-	<script src='plugins/fullcalendar/gcal.js'></script>
 	<script src="plugins/slick/slick.min.js"></script>
 	<script type="text/javascript">
 	$(function() {
@@ -228,43 +241,6 @@
 			arrows: false,
 			prevArrow: '<button type="button" class="slick-prev">&lsaquo;</button>',
 			nextArrow: '<button type="button" class="slick-next">&rsaquo;</button>'
-		});
-
-		// fullcalendar plugin setting
-		var key = 'AIzaSyBzCLml2cEJPuA4ia61gWbnGFabRTRec5Y';
-		var calendarid = 'bflhstu488ij2snuvvqu9p3hvs@group.calendar.google.com';
-		$('#calendar').fullCalendar({
-			// google calendar api key
-			googleCalendarApiKey: 'AIzaSyBzCLml2cEJPuA4ia61gWbnGFabRTRec5Y',
-			height: 'auto',
-			header: {
-				left: 'prev',
-				center: 'title',
-				right: 'today next'
-			},
-			events: {
-				// google calendar id
-				googleCalendarId: 'bflhstu488ij2snuvvqu9p3hvs@group.calendar.google.com'
-			},
-			eventColor: '#FFD151',
-			eventTextColor: '#3C1518',
-			eventClick: function(calEvent, jsEvent, view) {
-				jsEvent.preventDefault();
-				// console.dir(jsEvent);
-				// console.dir(calEvent.title);
-				// console.dir(calEvent.description);
-				console.dir(calEvent);
-				// console.dir(view);
-				var start = calEvent.start, end = calEvent.end;
-				var f = 'hh:mm a';
-				var d = start.format('YYYY-MM-DD');
-				var ts = start.format(f), te = end.format(f);
-				console.dir(d);
-				$('#msg .modal-title').text(calEvent.title);
-				$('#msg .modal-box').html('<p>日期：' + d + '</p><p>時間：' + ts + '～' + te + '</p><p>' + calEvent.description + '</p>');
-				$('#msg #modal-link').attr('href', calEvent.url);
-				$('#msg').modal();
-			}
 		});
 
 		// google map setting

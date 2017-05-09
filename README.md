@@ -8,6 +8,7 @@
 + Google Calendar 連動
 + Google Map 內嵌
 + 網站圖片跑馬燈
++ Responsive
 
 ### 使用外掛
 + [Bootstrap](http://getbootstrap.com/)

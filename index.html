@@ -8,23 +8,9 @@
 	<title>橘蘋巢 OranpleNest</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel='stylesheet' href='plugins/fullcalendar/fullcalendar.css' />
 	<link rel="stylesheet" href="plugins/slick/slick.css"/>
 	<link rel="stylesheet" href="css/style.css">
-	<style>
-		#calendar-container {
-			position: relative;
-			width: 100%;
-			height: 0;
-			padding-bottom: 66.6%;
-		}
-		#calendar-container>iframe {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			left: 0;
-			top: 0;
-		}
-	</style>
 </head>
 <body>
 	<header id="header" data-id="top">
@@ -70,9 +56,7 @@
 						<p>詳情請見 <a title="前往橘蘋巢 FB 粉絲專頁！" href="https://www.facebook.com/oranple.nest/" target="_blank" style="text-decoration: underline;">橘蘋巢 FACEBOOK 粉絲專頁</a>！</p>
 					</article>
 					<article class="col-md-7">
-						<div id="calendar-container">
-							<iframe id="calendar" src="https://calendar.google.com/calendar/embed?src=ccsakura-net.com_8a98d1hbmutgrqgkmeee1ab7r0%40group.calendar.google.com&ctz=Asia/Taipei" style="border: 0" frameborder="0" scrolling="no" style="width: 100%; display: block; position: relative;"></iframe>
-						</div>
+						<div id="calendar"></div>
 					</article>
 				</div>
 			</div>
@@ -126,7 +110,7 @@
 						<label>Phone</label>
 						<p>0928-026-404</p>
 						<label>Email</label>
-						<p>oranple@ccsakura-net.com</p>
+						<p>oranplenest1@gmail.com</p>
 						<label>Address</label>
 						<p>10649 台灣台北市青田街六巷十一號</p>
 						<p>&nbsp;</p>
@@ -140,33 +124,6 @@
 				</div>
 			</div>
 		</section>
-		<!--
-		<section id="box-contact" class="main-box">
-			<div class="triangle-bottom" style="border-top-color: #8F2813;" data-id="4"></div>
-			<div class="box-inner row">
-				<h1>聯絡我們</h1>
-				<form class="box-content row col-sm-8 col-sm-offset-2">
-					<div class="col-sm-6 contact-block">
-						<div class="form-group">
-							<input type="" class="form-control" id="input-name" placeholder="Name">
-						</div>
-						<div class="form-group">
-							<input type="" class="form-control" id="input-email" placeholder="Email">
-						</div>
-						<div class="form-group">
-							<input type="" class="form-control" id="input-subject" placeholder="Subject">
-						</div>
-					</div>
-					<div class="col-sm-6 contact-block">
-						<div class="form-group">
-							<textarea type="" class="form-control" id="input-message" placeholder="Message"></textarea>
-						</div>
-					</div>
-					<button id="input-send" class="btn">Send</button>
-				</form>
-			</div>
-		</section>
-		-->
 	</div>
 
 	<!-- ====== FLOAT FLOOR BUTTON ====== -->
@@ -185,11 +142,6 @@
 				<div id="float-3" class="float-item">
 					<button data-level="3">3</button>
 				</div>
-				<!--
-				<div id="float-4" class="float-item">
-					<button data-level="4">4</button>
-				</div>
-				-->
 				<div id="float-fb" class="float-item">
 					<a title="前往橘蘋巢 FB 粉絲專頁！" target="_blank" href="https://www.facebook.com/oranple.nest/"><img src="img/FB-f-Logo__white_50.png"></a>
 				</div>
@@ -228,6 +180,9 @@
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/moment-with-locales.min.js"></script>
+	<script src='plugins/fullcalendar/fullcalendar.js'></script>
+	<script src='plugins/fullcalendar/gcal.js'></script>
 	<script src="plugins/slick/slick.min.js"></script>
 	<script type="text/javascript">
 	$(function() {
@@ -241,6 +196,37 @@
 			arrows: false,
 			prevArrow: '<button type="button" class="slick-prev">&lsaquo;</button>',
 			nextArrow: '<button type="button" class="slick-next">&rsaquo;</button>'
+		});
+
+		// fullcalendar plugin setting
+		var key = 'AIzaSyBpoq57_6LYh_g-Z3wUUYJdz4-kFpWV8Ks';
+		var calendarid = 'oranplenest1@gmail.com';
+		$('#calendar').fullCalendar({
+			// google calendar api key
+			googleCalendarApiKey: key,
+			height: 'auto',
+			header: {
+				left: 'prev',
+				center: 'title',
+				right: 'today next'
+			},
+			events: {
+				// google calendar id
+				googleCalendarId: calendarid
+			},
+			eventColor: '#FFD151',
+			eventTextColor: '#3C1518',
+			eventClick: function(calEvent, jsEvent, view) {
+				jsEvent.preventDefault();
+				var start = calEvent.start, end = calEvent.end;
+				var f = 'hh:mm a';
+				var d = start.format('YYYY-MM-DD');
+				var ts = start.format(f), te = end.format(f);
+				$('#msg .modal-title').text(calEvent.title);
+				$('#msg .modal-box').html('<p>日期：' + d + '</p><p>時間：' + ts + '～' + te + '</p><p>&nbsp;</p><p>' + calEvent.description.replace(/(\r\n|\n|\r)/gm, "<br />") + '</p>');
+				$('#msg #modal-link').attr('href', calEvent.url);
+				$('#msg').modal();
+			}
 		});
 
 		// google map setting

@@ -177,8 +177,8 @@
 		</div>
 	</footer>
 
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="//maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/moment-with-locales.min.js"></script>
 	<script src='plugins/fullcalendar/fullcalendar.js'></script>
@@ -226,7 +226,9 @@
 				$('#msg .modal-box').html('<p>日期：' + d + '</p><p>時間：' + ts + '～' + te + '</p><p>&nbsp;</p><p>' + calEvent.description.replace(/(\r\n|\n|\r)/gm, "<br />") + '</p>');
 				$('#msg #modal-link').attr('href', calEvent.url);
 				$('#msg').modal();
-			}
+			},
+			// don't show the time before the title of events
+			displayEventTime: false
 		});
 
 		// google map setting
@@ -257,8 +259,6 @@
 
 		// triangle button
 		$('.triangle-bottom').click(function(e) {
-			console.dir($(this));
-			console.dir($('.triangle-bottom'));
 			$('html, body').animate({
 				scrollTop: $(this).offset().top
 			}, 900);

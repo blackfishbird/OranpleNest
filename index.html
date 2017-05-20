@@ -93,7 +93,7 @@
 						<h1>共食空間<br />租借場所</h1>
 						<p>每兩個月一次，一人一道菜的社區聚會活動，歡迎大家前來分享食物，認識新朋友。租借空間請與我們聯絡。</p>
 						<p>&nbsp;</p>
-						<p style="text-align: right;"><a class="box-link btn" title="前往橘蘋巢 FB 粉絲專頁來了解更多！"  href="https://www.facebook.com/oranple.nest/" target="_blank">了解更多</a></p>
+						<p style="text-align: right;"><a class="box-link btn" title="前往橘蘋巢 FB 粉絲專頁來了解更多！"  href="https://www.facebook.com/oranple.nest/posts/1161587690613668" target="_blank">了解更多</a></p>
 					</article>
 				</div>
 			</div>
@@ -119,7 +119,9 @@
 						<a id="input-send" class="btn" title="前往表單以聯絡我們"  target="_blank" href="https://goo.gl/forms/ijMP2miB9zU38W6o2">聯絡我們</a>
 					</article>
 					<article class="col-sm-8">
-						<div id="map_canvas" style="height: 380px; margin: 20px auto;"></div>
+						<div id="map_canvas" style="height: 380px; margin: 20px auto;">
+							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.172305153448!2d121.52899631466228!3d25.02822598397497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a98402cbe0a3%3A0xa028135ed1acadb0!2zMTA25Y-w5YyX5biC5aSn5a6J5Y2A6Z2S55Sw6KGXNuW3tzEx6Jmf!5e0!3m2!1szh-TW!2stw!4v1495296972376" frameborder="0" style="border: 0; width: 100%; height: 100%;" allowfullscreen></iframe>
+						</div>
 					</article>
 				</div>
 			</div>
@@ -230,32 +232,6 @@
 			// don't show the time before the title of events
 			displayEventTime: false
 		});
-
-		// google map setting
-		function initialize() {
-			var mapCanvas = document.getElementById("map_canvas");
-			var mapCenter = new google.maps.LatLng(25.028281, 121.531169);
-			var mapOptions = {
-			    center: mapCenter,
-			    zoom: 15,
-				panControl: true,
-				zoomControl: true,
-				mapTypeControl: true,
-				streetViewControl: true,
-				scrollwheel: false,
-			    mapTypeId: google.maps.MapTypeId.ROADMAP
-			}
-			var map = new google.maps.Map(mapCanvas, mapOptions);
-			var marker = new google.maps.Marker({
-				position: mapCenter
-			});
-			marker.setMap(map);
-			var infowindow = new google.maps.InfoWindow({
-				content: '橘蘋巢：10649 台灣台北市青田街六巷十一號'
-			});
-			infowindow.open(map, marker);
-		}
-		google.maps.event.addDomListener(window, 'load', initialize);
 
 		// triangle button
 		$('.triangle-bottom').click(function(e) {

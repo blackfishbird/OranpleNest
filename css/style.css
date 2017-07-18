@@ -357,12 +357,15 @@ a.box-link:before {
 }
 #box-fruit {
 	background-image: url('../img/bg-fruit.png');
+	background-position: 100% 0;
 }
 #box-cake {
 	background-image: url('../img/bg-cake.png');
+	background-position: 0 0;
 }
 #box-place {
 	background-image: url('../img/bg-place.png');
+	background-position: 100% 0;
 }
 .box h1 {
 	text-align: left;
